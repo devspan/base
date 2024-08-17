@@ -4,10 +4,19 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { ChevronDown, ChevronUp, Zap, Shield, Rocket, Code, Globe } from 'lucide-react'
+import { ChevronDown, ChevronUp, Zap, Shield, Rocket, Code, Globe, LucideIcon } from 'lucide-react'
 import { useTheme } from 'next-themes'
 
-const roadmapData = [
+interface RoadmapItem {
+  phase: string;
+  title: string;
+  date: string;
+  color: string;
+  icon: LucideIcon;
+  items: string[];
+}
+
+const roadmapData: RoadmapItem[] = [
   {
     phase: 'Phase 1',
     title: 'Inception and Awareness',
@@ -70,7 +79,13 @@ const roadmapData = [
   }
 ]
 
-const RoadmapItem = ({ item, index, isLast }) => {
+interface RoadmapItemProps {
+  item: RoadmapItem;
+  index: number;
+  isLast: boolean;
+}
+
+const RoadmapItem: React.FC<RoadmapItemProps> = ({ item, index, isLast }) => {
   const [isExpanded, setIsExpanded] = useState(false)
   const { theme } = useTheme()
   const Icon = item.icon
@@ -82,19 +97,19 @@ const RoadmapItem = ({ item, index, isLast }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="mb-8 relative"
+      className="mb-12 relative"
     >
       <div 
-        className={`absolute left-8 top-8 bottom-0 w-0.5 ${isLast ? 'h-8' : 'h-full'}`}
+        className={`absolute left-10 top-12 bottom-0 w-1 ${isLast ? 'h-12' : 'h-full'}`}
         style={{
           background: `linear-gradient(to bottom, ${item.color}, transparent)`
         }}
       ></div>
-      <Card className="overflow-hidden border-none shadow-lg">
+      <Card className="overflow-hidden border-none shadow-lg h-auto">
         <CardContent className="p-0">
           <Button
             variant="ghost"
-            className="w-full p-4 flex items-center justify-between text-left hover:bg-transparent"
+            className="w-full p-6 flex items-center justify-between text-left hover:bg-transparent h-auto"
             onClick={toggleExpand}
             aria-expanded={isExpanded}
             style={{ 
@@ -103,16 +118,16 @@ const RoadmapItem = ({ item, index, isLast }) => {
                 : `linear-gradient(45deg, ${item.color}11, ${item.color}05)`
             }}
           >
-            <div className="flex items-center space-x-4">
-              <div className="p-2 rounded-full" style={{ backgroundColor: item.color }}>
-                <Icon size={24} color="white" />
+            <div className="flex items-center space-x-6">
+              <div className="p-3 rounded-full" style={{ backgroundColor: item.color }}>
+                <Icon size={32} color="white" />
               </div>
               <div>
-                <h3 className="font-bold text-lg" style={{ color: item.color }}>{item.phase}</h3>
-                <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{item.title}</p>
+                <h3 className="font-bold text-2xl mb-1" style={{ color: item.color }}>{item.phase}</h3>
+                <p className={`text-lg ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{item.title}</p>
               </div>
             </div>
-            {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+            {isExpanded ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
           </Button>
           <AnimatePresence>
             {isExpanded && (
@@ -122,19 +137,19 @@ const RoadmapItem = ({ item, index, isLast }) => {
                 exit={{ opacity: 0, height: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className={`p-4 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
-                  <p className={`text-sm ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} mb-2`}>{item.date}</p>
-                  <ul className="space-y-2">
-                    {item.items.map((listItem, i) => (
+                <div className={`p-6 ${theme === 'dark' ? 'bg-gray-800' : 'bg-white'}`}>
+                  <p className={`text-lg ${theme === 'dark' ? 'text-gray-400' : 'text-gray-500'} mb-4`}>{item.date}</p>
+                  <ul className="space-y-3">
+                    {item.items.map((listItem: string, i: number) => (
                       <motion.li
                         key={i}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.3, delay: i * 0.1 }}
-                        className="flex items-center space-x-2"
+                        className="flex items-center space-x-3"
                       >
-                        <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
-                        <span className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{listItem}</span>
+                        <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }}></div>
+                        <span className={`text-base ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'}`}>{listItem}</span>
                       </motion.li>
                     ))}
                   </ul>
@@ -148,27 +163,27 @@ const RoadmapItem = ({ item, index, isLast }) => {
   )
 }
 
-export default function Roadmap() {
+const Roadmap: React.FC = () => {
   const { theme } = useTheme()
 
   return (
-    <section className={`py-16 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
+    <section className={`py-20 ${theme === 'dark' ? 'bg-gray-900' : 'bg-gradient-to-b from-gray-50 to-white'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className={`text-4xl font-bold mb-4 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
+          <h2 className={`text-5xl font-bold mb-6 ${theme === 'dark' ? 'text-white' : 'text-gray-900'}`}>
             Our Journey and Future Plans
           </h2>
-          <p className={`text-xl max-w-2xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className={`text-2xl max-w-3xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
             Explore Rupaya's development timeline and upcoming milestones in our interactive roadmap.
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           {roadmapData.map((item, index) => (
             <RoadmapItem 
               key={item.phase} 
@@ -182,3 +197,5 @@ export default function Roadmap() {
     </section>
   )
 }
+
+export default Roadmap

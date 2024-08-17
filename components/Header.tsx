@@ -10,6 +10,7 @@ import { Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
+  { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
   { href: '/tokenomics', label: 'Tokenomics' },
   { href: '/roadmap', label: 'Roadmap' },
@@ -30,17 +31,15 @@ export default function Header() {
             <NavigationMenuList>
               {navItems.map((item) => (
                 <NavigationMenuItem key={item.href}>
-                  <NavigationMenuLink asChild>
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
-                        pathname === item.href ? "bg-accent" : ""
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                  </NavigationMenuLink>
+                  <Link
+                    href={item.href}
+                    className={cn(
+                      "group inline-flex h-9 w-max items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50",
+                      pathname === item.href ? "bg-accent" : ""
+                    )}
+                  >
+                    {item.label}
+                  </Link>
                 </NavigationMenuItem>
               ))}
             </NavigationMenuList>
@@ -48,12 +47,12 @@ export default function Header() {
         </div>
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="ghost" className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+            <Button className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="pr-0">
+          <SheetContent className="w-[300px] sm:w-[400px]">
             <Link href="/" className="flex items-center">
               <span className="font-bold">Rupaya</span>
             </Link>

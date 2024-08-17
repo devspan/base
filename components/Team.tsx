@@ -24,7 +24,7 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Aasim',
     role: 'Founder',
-    image: '/images/team/aasim.jpg',
+    image: 'https://via.placeholder.com/160x160.png?text=Aasim',
     bio: 'Blockchain enthusiast with a vision for financial inclusion in South Asia. Aasim has over 10 years of experience in fintech and is passionate about leveraging technology to solve real-world problems.',
     linkedin: 'https://linkedin.com/in/aasim',
     twitter: 'https://twitter.com/aasim',
@@ -65,8 +65,9 @@ const TeamMember: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({
                 <Image
                   src={member.image}
                   alt={member.name}
-                  layout="fill"
-                  objectFit="cover"
+                  width={160}
+                  height={160}
+                  className="object-cover"
                 />
               ) : (
                 <Skeleton className="h-full w-full rounded-full" />
@@ -77,7 +78,7 @@ const TeamMember: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({
               <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-3">{member.role}</p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{member.bio}</p>
               {!isPlaceholder && (
-                <Button variant="outline" onClick={() => setIsOpen(true)}>View Profile</Button>
+                <Button onClick={() => setIsOpen(true)}>View Profile</Button>
               )}
             </div>
           </CardContent>

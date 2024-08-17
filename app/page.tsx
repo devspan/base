@@ -12,7 +12,6 @@ export default function Home() {
       <Tokenomics />
       <Roadmap />
       <Team />
-      {/* We'll add more sections here as we build them */}
     </div>
   )
 }

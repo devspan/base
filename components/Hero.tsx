@@ -1,26 +1,19 @@
 'use client'
 
-import { motion, useAnimation } from 'framer-motion'
-import { useEffect } from 'react'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { useInView } from 'react-intersection-observer'
+import { getEnvVariable, isTestnetEnabled } from '@/lib/utils'
 
-export default function Hero() {
+export default function Component() {
   const { theme } = useTheme()
-  const controls = useAnimation()
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
-
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible')
-    }
-  }, [controls, inView])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -41,25 +34,27 @@ export default function Hero() {
     }
   }
 
+  const apiUrl = getEnvVariable('NEXT_PUBLIC_RUPAYA_API_URL')
+  const isTestnet = isTestnetEnabled()
+
   return (
     <div className={`relative overflow-hidden ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'}`}>
       <div className="max-w-7xl mx-auto">
-        <div className="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+        <div className={`relative z-10 pb-8 ${theme === 'dark' ? 'bg-gray-900' : 'bg-white'} sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32`}>
           <svg
-            className={`hidden lg:block absolute right-0 inset-y-0 h-full w-48 transform translate-x-1/2 ${theme === 'dark' ? 'text-gray-900' : 'text-white'}`}
-            fill="currentColor"
+            className="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
+            fill={theme === 'dark' ? '#111827' : 'currentColor'}
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             aria-hidden="true"
           >
             <polygon points="50,0 100,0 50,100 0,100" />
           </svg>
-
           <motion.main
             ref={ref}
             variants={containerVariants}
             initial="hidden"
-            animate={controls}
+            animate={inView ? "visible" : "hidden"}
             className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28"
           >
             <div className="sm:text-center lg:text-left">
@@ -82,14 +77,14 @@ export default function Hero() {
               >
                 <div className="rounded-md shadow">
                   <Link href="/whitepaper" passHref>
-                    <Button size="lg" className="w-full">
+                    <Button className="w-full">
                       Read Whitepaper
                     </Button>
                   </Link>
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <Link href="/join" passHref>
-                    <Button size="lg" variant="outline" className="w-full">
+                    <Button variant="outline" className="w-full">
                       Join Community
                     </Button>
                   </Link>
@@ -105,18 +100,24 @@ export default function Hero() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Image
-          className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-          src={theme === 'dark' 
-            ? "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" 
-            : "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
-          }
-          alt="Rupaya DeFi"
-          layout="fill"
-          objectFit="cover"
-          priority
-        />
+        <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full">
+          <Image
+            src={theme === 'dark' 
+              ? "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" 
+              : "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
+            }
+            alt="Rupaya DeFi"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
       </motion.div>
+      {isTestnet && (
+        <div className="absolute bottom-0 left-0 right-0 w-full bg-yellow-200 text-yellow-800 p-2 text-center z-50">
+          Testnet Mode Enabled
+        </div>
+      )}
     </div>
   )
 }
