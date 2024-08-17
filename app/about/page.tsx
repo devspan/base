@@ -12,7 +12,7 @@ import Link from 'next/link'
 const aboutSections = [
   {
     title: "Our Mission",
-    content: "Rupaya is on a mission to revolutionize finance in South Asia through decentralized technology. We're committed to breaking down barriers to financial inclusion, creating opportunities for millions across the region, and fostering economic growth through blockchain innovation.",
+    content: "Rupaya is on a mission to revolutionize finance in South Asia through decentralized technology. We&apos;re committed to breaking down barriers to financial inclusion, creating opportunities for millions across the region, and fostering economic growth through blockchain innovation.",
     icon: RocketIcon,
   },
   {
@@ -22,22 +22,22 @@ const aboutSections = [
   },
   {
     title: "Our Impact",
-    content: "Rupaya is making a tangible difference in South Asia's financial landscape. We're providing financial services to the unbanked, significantly reducing remittance costs for migrant workers, enabling micro-investments and savings for small businesses, and fostering entrepreneurship through decentralized lending platforms.",
+    content: "Rupaya is making a tangible difference in South Asia&apos;s financial landscape. We&apos;re providing financial services to the unbanked, significantly reducing remittance costs for migrant workers, enabling micro-investments and savings for small businesses, and fostering entrepreneurship through decentralized lending platforms.",
     icon: BarChartIcon,
   },
   {
     title: "Technology",
-    content: "At the heart of Rupaya is cutting-edge blockchain technology. Our platform ensures secure and transparent transactions, enables low-cost financial operations, and provides seamless interoperability with global financial systems. Through smart contracts, we're automating and securing financial services like never before.",
+    content: "At the heart of Rupaya is cutting-edge blockchain technology. Our platform ensures secure and transparent transactions, enables low-cost financial operations, and provides seamless interoperability with global financial systems. Through smart contracts, we&apos;re automating and securing financial services like never before.",
     icon: GlobeIcon,
   },
   {
     title: "Tokenomics",
-    content: "The RUPX token is the lifeblood of our ecosystem. With a total supply of 100 million tokens, RUPX is designed for optimal distribution and utility. It's not just a cryptocurrency; it's a key that unlocks a world of decentralized financial services tailored for South Asia.",
+    content: "The RUPX token is the lifeblood of our ecosystem. With a total supply of 100 million tokens, RUPX is designed for optimal distribution and utility. It&apos;s not just a cryptocurrency; it&apos;s a key that unlocks a world of decentralized financial services tailored for South Asia.",
     icon: CoinsIcon,
   },
   {
     title: "Security & Compliance",
-    content: "We prioritize the security of our users and their assets. Rupaya employs state-of-the-art security measures and adheres to best practices in blockchain security. We're also committed to regulatory compliance, working closely with authorities to ensure our services align with local and international financial regulations.",
+    content: "We prioritize the security of our users and their assets. Rupaya employs state-of-the-art security measures and adheres to best practices in blockchain security. We&apos;re also committed to regulatory compliance, working closely with authorities to ensure our services align with local and international financial regulations.",
     icon: ShieldIcon,
   },
 ]
@@ -89,7 +89,7 @@ export default function AboutPage() {
             About Rupaya
           </motion.h1>
           <motion.p variants={itemVariants} className={`mt-4 max-w-3xl mx-auto text-xl ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-            Empowering South Asia's financial future through innovative blockchain technology and decentralized finance solutions.
+            Empowering South Asia&apos;s financial future through innovative blockchain technology and decentralized finance solutions.
           </motion.p>
         </motion.div>
 
@@ -131,7 +131,7 @@ export default function AboutPage() {
             Join the Rupaya Revolution
           </motion.h2>
           <motion.p variants={itemVariants} className={`mb-8 max-w-2xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-            Be part of the movement that's reshaping South Asia's financial landscape. Whether you're an investor, developer, or simply curious about decentralized finance, there's a place for you in the Rupaya ecosystem.
+            Be part of the movement that&apos;s reshaping South Asia&apos;s financial landscape. Whether you&apos;re an investor, developer, or simply curious about decentralized finance, there&apos;s a place for you in the Rupaya ecosystem.
           </motion.p>
           <motion.div variants={itemVariants} className="space-x-4">
             <Button asChild className="px-6 py-3 text-lg">

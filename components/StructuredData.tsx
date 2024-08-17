@@ -1,5 +1,4 @@
 import React from 'react';
-import { Metadata } from 'next';
 
 interface StructuredDataProps {
   type: 'Organization' | 'WebSite' | 'FAQPage';
@@ -7,13 +6,13 @@ interface StructuredDataProps {
 }
 
 const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': type,
-    ...data,
-  };
-
   React.useEffect(() => {
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': type,
+      ...data,
+    };
+
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.text = JSON.stringify(structuredData);
@@ -22,7 +21,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
     return () => {
       document.head.removeChild(script);
     };
-  }, [structuredData]);
+  }, [type, data]);
 
   return null;
 };

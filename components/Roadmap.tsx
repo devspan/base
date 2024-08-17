@@ -179,7 +179,7 @@ const Roadmap: React.FC = () => {
             Our Journey and Future Plans
           </h2>
           <p className={`text-2xl max-w-3xl mx-auto ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>
-            Explore Rupaya's development timeline and upcoming milestones in our interactive roadmap.
+          Explore Rupaya&apos;s development timeline and upcoming milestones in our interactive roadmap.
           </p>
         </motion.div>
 
