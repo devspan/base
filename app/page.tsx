@@ -4,12 +4,12 @@ import Tokenomics from "@/components/Tokenomics";
 import Roadmap from "@/components/Roadmap";
 import Team from "@/components/Team";
 import { jsonLdScriptProps } from 'react-schemaorg';
-import { Organization, WebSite } from 'schema-dts';
+import { Organization, WebSite, SearchAction } from 'schema-dts';
 import { metadata } from "./page.metadata";
 
 export { metadata };
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io'
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io';
 
 export default function Home() {
   return (
@@ -34,15 +34,15 @@ export default function Home() {
         {...jsonLdScriptProps<WebSite>({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: process.env.NEXT_PUBLIC_SITE_NAME,
           url: baseUrl,
           potentialAction: {
             "@type": "SearchAction",
             target: `${baseUrl}/search?q={search_term_string}`,
-            "query-input": "required name=search_term_string"
-          }
+            "query": "required name=search_term_string"
+          } as SearchAction
         })}
       />
+
       <div>
         <Hero />
         <Features />
