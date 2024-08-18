@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa';
+import { FaLinkedin, FaTwitter, FaGithub, FaDiscord, FaTelegram } from 'react-icons/fa';
 import { Skeleton } from "@/components/ui/skeleton";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -18,19 +18,22 @@ interface TeamMember {
   linkedin?: string;
   twitter?: string;
   github?: string;
+  discord?: string;
+  telegram?: string;
 }
 
 const teamMembers: TeamMember[] = [
   {
     name: 'Aasim',
     role: 'Founder',
-    image: 'https://via.placeholder.com/160x160.png?text=Aasim',
-    bio: 'Blockchain enthusiast with a vision for financial inclusion in South Asia. Aasim has over 10 years of experience in fintech and is passionate about leveraging technology to solve real-world problems.',
-    linkedin: 'https://linkedin.com/in/aasim',
-    twitter: 'https://twitter.com/aasim',
-    github: 'https://github.com/aasim'
+    image: '/images/team/aasim.jpeg',
+    bio: 'Blockchain pioneer since 2010. Aasim has over 13 years of experience revolutionizing finance and is passionate about leveraging technology for financial inclusion in South Asia.',
+    linkedin: 'https://www.linkedin.com/in/aasim-khan/',
+    twitter: 'https://twitter.com/satoshiwho',
+    github: 'https://github.com/mo-bay',
+    discord: 'mobay_',
+    telegram: '@beyzzzz'
   },
-  // Add more actual team members here
 ];
 
 const placeholderMembers: TeamMember[] = [
@@ -56,8 +59,8 @@ const TeamMember: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({
         whileHover={{ y: -5 }}
         whileTap={{ scale: 0.95 }}
       >
-        <Card className="overflow-hidden">
-          <CardContent className="p-6">
+        <Card className="overflow-hidden h-full">
+          <CardContent className="p-6 flex flex-col h-full">
             <div className="relative h-40 w-40 mx-auto rounded-full overflow-hidden mb-4">
               {isPlaceholder ? (
                 <Skeleton className="h-full w-full rounded-full" />
@@ -73,12 +76,14 @@ const TeamMember: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({
                 <Skeleton className="h-full w-full rounded-full" />
               )}
             </div>
-            <div className="text-center">
-              <h3 className="text-lg font-medium">{member.name}</h3>
-              <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-3">{member.role}</p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-2">{member.bio}</p>
+            <div className="text-center flex-grow flex flex-col justify-between">
+              <div>
+                <h3 className="text-lg font-medium">{member.name}</h3>
+                <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-3">{member.role}</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4 line-clamp-3">{member.bio}</p>
+              </div>
               {!isPlaceholder && (
-                <Button onClick={() => setIsOpen(true)}>View Profile</Button>
+                <Button onClick={() => setIsOpen(true)} className="mt-auto">View Profile</Button>
               )}
             </div>
           </CardContent>
@@ -110,6 +115,18 @@ const TeamMember: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({
                 <a href={member.github} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
                   <span className="sr-only">GitHub</span>
                   <FaGithub className="h-5 w-5" />
+                </a>
+              )}
+              {member.discord && (
+                <a href={`https://discord.com/users/${member.discord}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">Discord</span>
+                  <FaDiscord className="h-5 w-5" />
+                </a>
+              )}
+              {member.telegram && (
+                <a href={`https://t.me/${member.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-500">
+                  <span className="sr-only">Telegram</span>
+                  <FaTelegram className="h-5 w-5" />
                 </a>
               )}
             </div>

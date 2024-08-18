@@ -6,47 +6,46 @@ import { motion } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'
+import { FaLinkedin, FaTwitter, FaGithub, FaDiscord, FaTelegram } from 'react-icons/fa'
+import { Skeleton } from "@/components/ui/skeleton"
 
-// Define the structure for team member data
 interface TeamMember {
   name: string;
   role: string;
-  image: string;
+  image?: string;
   bio: string;
   linkedin?: string;
   twitter?: string;
   github?: string;
+  discord?: string;
+  telegram?: string;
 }
 
-// Team member data
 const teamMembers: TeamMember[] = [
   {
     name: "Aasim",
-    role: "Founder & CEO",
-    image: "/images/team/aasim.jpg",
-    bio: "Blockchain enthusiast with a vision for financial inclusion in South Asia. 10+ years of experience in fintech.",
-    linkedin: "https://linkedin.com/in/aasim",
-    twitter: "https://twitter.com/aasim",
-    github: "https://github.com/aasim"
+    role: "Founder",
+    image: "/images/team/aasim.jpeg",
+    bio: "Blockchain enthusiast with a vision for financial inclusion in South Asia. Aasim has over 10 years of experience in fintech and is passionate about leveraging technology to solve real-world problems.",
+    linkedin: "https://www.linkedin.com/in/aasim-khan/",
+    twitter: "https://twitter.com/satoshiwho",
+    github: "https://github.com/mo-bay",
+    discord: "mobay_",
+    telegram: "@beyzzzz"
+  },
+]
+
+const placeholderMembers: TeamMember[] = [
+  {
+    name: "This could be you",
+    role: "Join Our Team",
+    bio: "We're always looking for passionate individuals to join our mission. If you're excited about blockchain and financial inclusion, we want to hear from you!",
   },
   {
-    name: "Sarah Khan",
-    role: "CTO",
-    image: "/images/team/sarah.jpg",
-    bio: "Expert in blockchain architecture and smart contract development. Previously worked at Ethereum Foundation.",
-    linkedin: "https://linkedin.com/in/sarahkhan",
-    github: "https://github.com/sarahkhan"
+    name: "This could be you",
+    role: "Join Our Team",
+    bio: "Help us revolutionize finance in South Asia. We offer a dynamic work environment and the opportunity to make a real impact.",
   },
-  {
-    name: "Rahul Patel",
-    role: "Head of Partnerships",
-    image: "/images/team/rahul.jpg",
-    bio: "Experienced in building strategic alliances in the fintech sector across South Asia.",
-    linkedin: "https://linkedin.com/in/rahulpatel",
-    twitter: "https://twitter.com/rahulpatel"
-  },
-  // Add more team members as needed
 ]
 
 const openPositions = [
@@ -55,6 +54,65 @@ const openPositions = [
   "Community Manager",
   "Marketing Specialist"
 ]
+
+const TeamMemberCard: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> = ({ member, isPlaceholder = false }) => {
+  const { theme } = useTheme()
+
+  return (
+    <Card className="overflow-hidden h-full flex flex-col">
+      <CardHeader className="p-6">
+        <div className="relative h-40 w-40 mx-auto rounded-full overflow-hidden mb-4">
+          {isPlaceholder ? (
+            <Skeleton className="h-full w-full rounded-full" />
+          ) : member.image ? (
+            <Image
+              src={member.image}
+              alt={member.name}
+              layout="fill"
+              objectFit="cover"
+            />
+          ) : (
+            <Skeleton className="h-full w-full rounded-full" />
+          )}
+        </div>
+        <CardTitle className="text-center">{member.name}</CardTitle>
+        <CardDescription className="text-center">{member.role}</CardDescription>
+      </CardHeader>
+      <CardContent className="p-6 flex-grow flex flex-col justify-between">
+        <p className={`text-sm ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'} text-center`}>{member.bio}</p>
+        {!isPlaceholder && (
+          <div className="mt-4 flex justify-center space-x-3 flex-wrap">
+            {member.linkedin && (
+              <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <FaLinkedin className="h-6 w-6 text-blue-500" />
+              </a>
+            )}
+            {member.twitter && (
+              <a href={member.twitter} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <FaTwitter className="h-6 w-6 text-blue-400" />
+              </a>
+            )}
+            {member.github && (
+              <a href={member.github} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <FaGithub className="h-6 w-6 text-gray-700 dark:text-gray-300" />
+              </a>
+            )}
+            {member.discord && (
+              <a href={`https://discord.com/users/${member.discord}`} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <FaDiscord className="h-6 w-6 text-indigo-500" />
+              </a>
+            )}
+            {member.telegram && (
+              <a href={`https://t.me/${member.telegram.replace('@', '')}`} target="_blank" rel="noopener noreferrer" className="mt-2">
+                <FaTelegram className="h-6 w-6 text-blue-300" />
+              </a>
+            )}
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  )
+}
 
 export default function TeamPage() {
   const { theme } = useTheme()
@@ -102,40 +160,12 @@ export default function TeamPage() {
           >
             {teamMembers.map((member) => (
               <motion.div key={member.name} variants={itemVariants}>
-                <Card className="overflow-hidden">
-                  <CardHeader className="p-0">
-                    <div className="relative h-48 w-full">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
-                  </CardHeader>
-                  <CardContent className="p-6">
-                    <CardTitle>{member.name}</CardTitle>
-                    <CardDescription>{member.role}</CardDescription>
-                    <p className={`mt-2 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-600'}`}>{member.bio}</p>
-                    <div className="mt-4 flex space-x-4">
-                      {member.linkedin && (
-                        <a href={member.linkedin} target="_blank" rel="noopener noreferrer">
-                          <FaLinkedin className="h-6 w-6 text-blue-500" />
-                        </a>
-                      )}
-                      {member.twitter && (
-                        <a href={member.twitter} target="_blank" rel="noopener noreferrer">
-                          <FaTwitter className="h-6 w-6 text-blue-400" />
-                        </a>
-                      )}
-                      {member.github && (
-                        <a href={member.github} target="_blank" rel="noopener noreferrer">
-                          <FaGithub className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-                        </a>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
+                <TeamMemberCard member={member} />
+              </motion.div>
+            ))}
+            {placeholderMembers.map((member, index) => (
+              <motion.div key={index} variants={itemVariants}>
+                <TeamMemberCard member={member} isPlaceholder={true} />
               </motion.div>
             ))}
           </motion.div>

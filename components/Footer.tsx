@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { FaTwitter, FaTelegram, FaGithub, FaDiscord } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
@@ -50,23 +49,15 @@ const footerLinks = [
 ];
 
 const Footer: React.FC = () => {
-  const { theme, systemTheme } = useTheme();
-
-  const currentTheme = theme === 'system' ? systemTheme : theme;
+  const { theme } = useTheme();
 
   return (
     <footer className="bg-background text-foreground">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <Link href="/" passHref>
-              <Image
-                src={currentTheme === 'dark' ? "https://via.placeholder.com/120x40.png?text=Rupaya+Dark" : "https://via.placeholder.com/120x40.png?text=Rupaya+Light"}
-                alt="Rupaya"
-                width={120}
-                height={40}
-                className="h-10 w-auto"
-              />
+            <Link href="/" className="text-2xl font-bold text-foreground hover:text-primary transition-colors">
+              Rupaya
             </Link>
             <p className="text-base">
               Empowering South Asia through decentralized finance.

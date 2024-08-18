@@ -15,6 +15,7 @@ const navItems = [
   { href: '/tokenomics', label: 'Tokenomics' },
   { href: '/roadmap', label: 'Roadmap' },
   { href: '/team', label: 'Team' },
+  { href: '/whitepaper', label: 'Whitepaper' },
 ]
 
 export default function Header() {
@@ -47,12 +48,12 @@ export default function Header() {
         </div>
         <Sheet>
           <SheetTrigger asChild>
-            <Button className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+            <Button variant="ghost" className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Toggle Menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent className="w-[300px] sm:w-[400px]">
+          <SheetContent side="left" className="pr-0">
             <Link href="/" className="flex items-center">
               <span className="font-bold">Rupaya</span>
             </Link>
@@ -74,7 +75,7 @@ export default function Header() {
         </Sheet>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <div className="w-full flex-1 md:w-auto md:flex-none">
-            <Button asChild className="w-full md:w-auto">
+            <Button asChild className="w-full md:w-auto md:hidden">
               <Link href="/whitepaper">Whitepaper</Link>
             </Button>
           </div>

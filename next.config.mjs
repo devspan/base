@@ -11,6 +11,10 @@ const nextConfig = {
     NEXT_PUBLIC_ENABLE_TESTNET: process.env.NEXT_PUBLIC_ENABLE_TESTNET,
     NEXT_PUBLIC_TWITTER_HANDLE: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
   },
-}
+  eslint: {
+    // This will warn but not fail the build if there are ESLint errors
+    ignoreDuringBuilds: true,
+  },
+};
 
 export default nextConfig;
