@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useTheme } from 'next-themes'
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
@@ -20,12 +22,22 @@ const navItems = [
 
 export default function Header() {
   const pathname = usePathname()
+  const { theme } = useTheme()
+
+  // Corrected logic: use dark logo for light mode and light logo for dark mode
+  const logoSrc = theme === 'dark' ? '/rupayalogo.svg' : '/rupayalogodark.svg'
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
+            <Image 
+              src={logoSrc}
+              alt="Rupaya Logo" 
+              width={24} 
+              height={24} 
+            />
             <span className="hidden font-bold sm:inline-block">Rupaya</span>
           </Link>
           <NavigationMenu>
@@ -54,7 +66,13 @@ export default function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="pr-0">
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center space-x-2">
+              <Image 
+                src={logoSrc}
+                alt="Rupaya Logo" 
+                width={24} 
+                height={24} 
+              />
               <span className="font-bold">Rupaya</span>
             </Link>
             <nav className="flex flex-col gap-4 mt-4">
