@@ -1,0 +1,39 @@
+{
+    "footerLinks": [
+      {
+        "title": "Rupaya",
+        "links": [
+          {
+            "text": "Website",
+            "url": "https://www.rupaya.io"
+          },
+          {
+            "text": "Whitepaper",
+            "url": "https://github.com/rupaya-project/rupaya-whitepaper/blob/main/whitepaper.md"
+          }
+        ]
+      },
+      {
+        "title": "Community",
+        "links": [
+          {
+            "text": "Twitter",
+            "url": "https://twitter.com/rupayacoin"
+          },
+          {
+            "text": "Discord",
+            "url": "https://discord.gg/cfbNWdThpy"
+          }
+        ]
+      },
+      {
+        "title": "Resources",
+        "links": [
+          {
+            "text": "GitHub",
+            "url": "https://github.com/rupaya-project"
+          }
+        ]
+      }
+    ]
+  }
