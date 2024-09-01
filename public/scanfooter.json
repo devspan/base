@@ -31,6 +31,10 @@
             {
                 "text": "GitHub",
                 "url": "https://github.com/rupaya-project"
+            },
+            {
+                "text": "Faucet",
+                "url": "https://faucet.rupaya.io"
             }
         ]
     }
