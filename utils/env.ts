@@ -7,5 +7,5 @@ export const getEnvVariable = (key: string): string => {
   }
   
   export const isTestnetEnabled = (): boolean => {
-    return process.env.NEXT_PUBLIC_ENABLE_TESTNET === 'true'
+    return process.env.NEXT_PUBLIC_ENABLE_TESTNET === 'false'
   }
