@@ -21,6 +21,8 @@ const navItems = [
   { href: '/team', label: 'Team' },
   { href: '/whitepaper', label: 'Whitepaper' },
   { href: 'https://faucet.rupaya.io', label: 'Faucet' },
+  { href: 'https://swap.rupaya.io', label: 'Swap' },
+  { href: 'https://app.rupaya.io', label: 'RupayaFi' },
 ]
 
 export default function Header() {
