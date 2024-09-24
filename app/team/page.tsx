@@ -65,11 +65,11 @@ const TeamMemberCard: React.FC<{ member: TeamMember; isPlaceholder?: boolean }> 
           {isPlaceholder ? (
             <Skeleton className="h-full w-full rounded-full" />
           ) : member.image ? (
-            <Image
-              src={member.image}
-              alt={member.name}
-              layout="fill"
-              objectFit="cover"
+            <Image 
+              src={member.image || '/images/placeholder-avatar.png'} 
+              alt={`${member.name} - ${member.role} at Rupaya`}
+              width={200} 
+              height={200} 
             />
           ) : (
             <Skeleton className="h-full w-full rounded-full" />

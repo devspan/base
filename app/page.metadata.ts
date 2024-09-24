@@ -3,20 +3,20 @@ import type { Metadata } from 'next'
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io'
 
 export const metadata: Metadata = {
-  title: `${process.env.NEXT_PUBLIC_SITE_NAME} - Empowering South Asia through Decentralized Finance`,
-  description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
-  keywords: 'Rupaya, cryptocurrency, blockchain, DeFi, South Asia, financial inclusion, RUPX token',
+  title: `Rupaya & RUPX - Empowering South Asia through Decentralized Finance | ${process.env.NEXT_PUBLIC_SITE_NAME}`,
+  description: `Rupaya: Revolutionizing finance in South Asia with RUPX, our native token. Join us in creating accessible, efficient, and secure blockchain-powered financial services for millions.`,
+  keywords: 'Rupaya, RUPX, cryptocurrency, blockchain, DeFi, South Asia, financial inclusion, RUPX token',
   openGraph: {
-    title: `${process.env.NEXT_PUBLIC_SITE_NAME} - Empowering South Asia through Decentralized Finance`,
-    description: process.env.NEXT_PUBLIC_SITE_DESCRIPTION,
+    title: `Rupaya & RUPX - Empowering South Asia through Decentralized Finance | ${process.env.NEXT_PUBLIC_SITE_NAME}`,
+    description: `Rupaya's blockchain ecosystem, powered by RUPX. Join the financial revolution in South Asia with innovative DeFi solutions.`,
     url: baseUrl,
     siteName: process.env.NEXT_PUBLIC_SITE_NAME,
     images: [
       {
-        url: process.env.NEXT_PUBLIC_OG_IMAGE_URL || `${baseUrl}/og-image.jpg`,
+        url: process.env.NEXT_PUBLIC_OG_IMAGE_URL || `${baseUrl}/rupaya-rupx-og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: `${process.env.NEXT_PUBLIC_SITE_NAME} - Decentralized Finance for South Asia`,
+        alt: `Rupaya & RUPX - Decentralized Finance for South Asia`,
       },
     ],
     locale: 'en_US',
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${process.env.NEXT_PUBLIC_SITE_NAME} - Empowering South Asia through DeFi`,
-    description: `Join the financial revolution in South Asia with ${process.env.NEXT_PUBLIC_SITE_NAME}'s blockchain solutions.`,
-    images: [process.env.NEXT_PUBLIC_TWITTER_IMAGE_URL || `${baseUrl}/twitter-image.jpg`],
+    title: `Rupaya & RUPX - Empowering South Asia through DeFi | ${process.env.NEXT_PUBLIC_SITE_NAME}`,
+    description: `Discover Rupaya's blockchain solutions and RUPX, our native token. Join the financial revolution in South Asia.`,
+    images: [process.env.NEXT_PUBLIC_TWITTER_IMAGE_URL || `${baseUrl}/rupaya-rupx-twitter-image.jpg`],
     creator: process.env.NEXT_PUBLIC_TWITTER_HANDLE,
   },
   robots: {
