@@ -11,7 +11,7 @@ const socialLinks = [
   { name: 'Twitter', href: 'https://twitter.com/rupayacoin', icon: FaTwitter },
   { name: 'Telegram', href: 'https://t.me/rupayacoin', icon: FaTelegram },
   { name: 'GitHub', href: 'https://github.com/rupayaproject', icon: FaGithub },
-  { name: 'Discord', href: 'https://discord.gg/rupaya', icon: FaDiscord },
+  { name: 'Discord', href: 'https://discord.gg/cfbNWdThpy', icon: FaDiscord },
 ];
 
 const footerLinks = [
