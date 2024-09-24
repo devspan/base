@@ -15,6 +15,10 @@ const nextConfig = {
     // This will warn but not fail the build if there are ESLint errors
     ignoreDuringBuilds: true,
   },
+  i18n: {
+    locales: ['en', 'hi', 'bn', 'ur'],
+    defaultLocale: 'en',
+  },
 };
 
 export default nextConfig;
