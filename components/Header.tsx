@@ -10,6 +10,7 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useEffect, useState } from 'react'
 
 const navItems = [
   { href: '/', label: 'Home' },
@@ -24,21 +25,27 @@ const navItems = [
 export default function Header() {
   const pathname = usePathname()
   const { theme } = useTheme()
+  const [mounted, setMounted] = useState(false)
 
-  // Corrected logic: use dark logo for light mode and light logo for dark mode
-  const logoSrc = theme === 'dark' ? '/rupayalogo.svg' : '/rupayalogodark.svg'
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const logoSrc = mounted && theme === 'dark' ? '/rupayalogo.svg' : '/rupayalogodark.svg'
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-14 items-center">
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Image 
-              src={logoSrc}
-              alt="Rupaya Logo" 
-              width={24} 
-              height={24} 
-            />
+            {mounted && (
+              <Image 
+                src={logoSrc}
+                alt="Rupaya Logo" 
+                width={24} 
+                height={24} 
+              />
+            )}
             <span className="hidden font-bold sm:inline-block">Rupaya</span>
           </Link>
           <NavigationMenu>
@@ -68,12 +75,14 @@ export default function Header() {
           </SheetTrigger>
           <SheetContent side="left" className="pr-0">
             <Link href="/" className="flex items-center space-x-2">
-              <Image 
-                src={logoSrc}
-                alt="Rupaya Logo" 
-                width={24} 
-                height={24} 
-              />
+              {mounted && (
+                <Image 
+                  src={logoSrc}
+                  alt="Rupaya Logo" 
+                  width={24} 
+                  height={24} 
+                />
+              )}
               <span className="font-bold">Rupaya</span>
             </Link>
             <nav className="flex flex-col gap-4 mt-4">
