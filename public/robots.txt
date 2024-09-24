@@ -1,0 +1,17 @@
+# robots.txt for https://rupaya.io
+
+User-agent: *
+Allow: /
+
+# Disallow access to API routes
+Disallow: /api/
+
+# Allow access to static assets
+Allow: /_next/static/
+Allow: /images/
+
+# Sitemaps
+Sitemap: https://rupaya.io/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 10
