@@ -5,6 +5,7 @@ import Header from '@/components/Header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AnalyticsProvider } from '@/components/providers/AnalyticsProvider'
 import './globals.css'
+import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             <AnalyticsProvider />
           </Suspense>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
