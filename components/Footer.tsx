@@ -69,10 +69,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="mt-32 border-t border-gray-200">
       <Container>
-        <div className="pb-8 pt-16">
-          <Logo className="h-8 w-auto" />
-        </div>
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4 pt-16">
           {navigation.map((section) => (
             <div key={section.title}>
               <h3 className="text-sm font-semibold">{section.title}</h3>
@@ -104,26 +101,32 @@ const Footer: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="flex flex-col items-center border-t border-gray-200 pt-8 pb-12 md:flex-row-reverse md:justify-between md:pt-6">
-          <div className="flex gap-6">
-            {socialLinks.map((item) => (
-              <motion.a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-gray-600"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                <span className="sr-only">{item.name}</span>
-                <item.icon className="h-6 w-6" aria-hidden="true" />
-              </motion.a>
-            ))}
+
+        <div className="border-t border-gray-200 pt-8 pb-12 mt-16">
+          <div className="flex flex-col-reverse gap-8 md:flex-row md:justify-between md:items-center">
+            <div className="flex flex-col md:flex-row md:items-center gap-6">
+              <Logo className="h-4 w-4 dark:invert" />
+              <p className="text-sm text-gray-500">
+                &copy; {new Date().getFullYear()} Rupaya. All rights reserved.
+              </p>
+            </div>
+            <div className="flex gap-6">
+              {socialLinks.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-gray-600"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <span className="sr-only">{item.name}</span>
+                  <item.icon className="h-6 w-6" aria-hidden="true" />
+                </motion.a>
+              ))}
+            </div>
           </div>
-          <p className="mt-6 text-sm text-gray-500 md:mt-0">
-            &copy; {new Date().getFullYear()} Rupaya. All rights reserved.
-          </p>
         </div>
       </Container>
     </footer>
