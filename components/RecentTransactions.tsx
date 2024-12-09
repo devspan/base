@@ -6,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { formatAddress } from '@/lib/utils'
 import { formatDistanceToNow } from 'date-fns'
 import { ArrowRightIcon, ArrowUpRight, CheckCircle2Icon } from 'lucide-react'
+import type { Route } from 'next'
 
 interface Transaction {
   hash: string;
@@ -138,9 +139,23 @@ export function RecentTransactions() {
                     </span>
                   </div>
                   <div className="flex items-center gap-1 text-sm text-muted-foreground">
-                    <span className="truncate">{formatAddress(tx.from)}</span>
+                    <a
+                      href={`https://scan.rupaya.io/address/${tx.from}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="truncate hover:text-primary"
+                    >
+                      {formatAddress(tx.from)}
+                    </a>
                     <ArrowRightIcon className="h-3 w-3 flex-shrink-0" />
-                    <span className="truncate">{formatAddress(tx.to)}</span>
+                    <a
+                      href={`https://scan.rupaya.io/address/${tx.to}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="truncate hover:text-primary"
+                    >
+                      {formatAddress(tx.to)}
+                    </a>
                   </div>
                 </div>
                 <div className="text-right">

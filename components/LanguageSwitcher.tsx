@@ -1,27 +1,47 @@
 'use client'
 
-import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
+import { useParams, useRouter } from 'next/navigation'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import type { Route } from 'next'
+
+const languages = [
+  { code: 'en', name: 'English' },
+  { code: 'hi', name: 'हिंदी' },
+  { code: 'bn', name: 'বাংলা' },
+  { code: 'ur', name: 'اردو' },
+]
 
 export function LanguageSwitcher() {
   const router = useRouter()
+  const params = useParams()
+  const currentLocale = params.locale as string || 'en'
 
-  const switchLanguage = (locale: string) => {
-    // Set the NEXT_LOCALE cookie
-    Cookies.set('NEXT_LOCALE', locale)
-    // Change the route to the new locale
-    router.push(router.pathname, router.asPath, { locale })
+  const handleLanguageChange = (newLocale: string) => {
+    // Get the current pathname segments
+    const segments = window.location.pathname.split('/')
+    // Replace the locale segment or add it if it doesn't exist
+    if (segments[1] === currentLocale) {
+      segments[1] = newLocale
+    } else {
+      segments.splice(1, 0, newLocale)
+    }
+    // Join the segments back together and ensure it's a valid route
+    const newPath = segments.join('/') as Route
+    router.push(newPath)
   }
 
   return (
-    <select 
-      onChange={(e) => switchLanguage(e.target.value)}
-      value={router.locale}
-    >
-      <option value="en">English</option>
-      <option value="hi">हिंदी</option>
-      <option value="bn">বাংলা</option>
-      <option value="ur">اردو</option>
-    </select>
+    <Select value={currentLocale} onValueChange={handleLanguageChange}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select Language" />
+      </SelectTrigger>
+      <SelectContent>
+        {languages.map((lang) => (
+          <SelectItem key={lang.code} value={lang.code}>
+            {lang.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   )
 } 

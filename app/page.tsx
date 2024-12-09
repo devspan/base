@@ -10,14 +10,15 @@ import Loading from './loading'
 import ErrorBoundary from '@/components/ErrorBoundary'
 import { NetworkStats } from '@/components/NetworkStats'
 import { RecentTransactions } from '@/components/RecentTransactions'
+import { ClientWrapper } from '@/components/ClientWrapper'
 
 export { metadata };
 
 const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <>
+    <ClientWrapper>
       <StructuredData 
         type="Organization"
         data={{
@@ -73,6 +74,6 @@ export default function Home() {
           </div>
         </section>
       </ErrorBoundary>
-    </>
+    </ClientWrapper>
   )
 }
