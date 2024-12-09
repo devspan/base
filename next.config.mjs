@@ -26,20 +26,33 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://*.google-analytics.com https://*.googletagmanager.com",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://*.google-analytics.com https://*.googletagmanager.com https://vercel.live https://vercel.com",
               "style-src 'self' 'unsafe-inline'",
-              "font-src 'self' data: https://www.rupaya.io",
+              "font-src 'self' data:",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://scan.rupaya.io https://*.vercel.live https://api.rupaya.io",
-              "frame-src 'self' https://*.vercel.live"
+              "connect-src 'self' https://scan.rupaya.io https://*.vercel.live https://vercel.live https://api.rupaya.io https://*.google-analytics.com",
+              "frame-src 'self' https://*.vercel.live https://vercel.live"
             ].join('; ')
+          },
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: 'https://rupaya.io'
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, OPTIONS'
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type'
           }
         ]
       }
     ]
   },
   env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io',
+    NEXT_PUBLIC_RUPAYA_API_URL: process.env.NEXT_PUBLIC_RUPAYA_API_URL || 'https://api.rupaya.io'
   },
   i18n: {
     locales: ['en', 'hi', 'bn', 'ur'],
