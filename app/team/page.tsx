@@ -23,10 +23,10 @@ interface TeamMember {
 
 const teamMembers: TeamMember[] = [
   {
-    name: "Aasim",
+    name: "mobay",
     role: "Founder",
-    image: "/images/team/aasim.jpeg",
-    bio: "Blockchain enthusiast with a vision for financial inclusion in South Asia. Aasim has over 10 years of experience in fintech and is passionate about leveraging technology to solve real-world problems.",
+    image: "https://avatars.githubusercontent.com/u/583231?v=4",
+    bio: "Blockchain enthusiast with a vision for financial inclusion in South Asia. Over 10 years of experience in fintech and passionate about leveraging technology to solve real-world problems.",
     linkedin: "https://www.linkedin.com/in/aasim-khan/",
     twitter: "https://twitter.com/satoshiwho",
     github: "https://github.com/mo-bay",
