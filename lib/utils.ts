@@ -46,3 +46,22 @@ export const handleError = (error: unknown) => {
     statusCode: 500,
   }
 }
+
+export function formatNumber(num?: number): string {
+  if (!num) return '0'
+  return new Intl.NumberFormat().format(num)
+}
+
+export function formatAddress(address: string | number | null | undefined): string {
+  if (!address || typeof address !== 'string') return '';
+  return `${address.slice(0, 6)}...${address.slice(-4)}`;
+}
+
+export function formatTimestamp(timestamp: string): string {
+  if (!timestamp) return ''
+  const date = new Date(timestamp)
+  return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(
+    Math.round((date.getTime() - Date.now()) / 1000 / 60),
+    'minute'
+  )
+}

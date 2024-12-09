@@ -8,6 +8,8 @@ import { metadata } from "./page.metadata";
 import { Suspense } from 'react'
 import Loading from './loading'
 import ErrorBoundary from '@/components/ErrorBoundary'
+import { NetworkStats } from '@/components/NetworkStats'
+import { RecentTransactions } from '@/components/RecentTransactions'
 
 export { metadata };
 
@@ -54,6 +56,22 @@ export default function Home() {
         </Suspense>
         <Roadmap />
         <Team />
+
+        <section className="py-12">
+          <div className="container">
+            <Suspense fallback={<Loading />}>
+              <NetworkStats />
+            </Suspense>
+          </div>
+        </section>
+
+        <section className="py-12">
+          <div className="container">
+            <Suspense fallback={<Loading />}>
+              <RecentTransactions />
+            </Suspense>
+          </div>
+        </section>
       </ErrorBoundary>
     </>
   )
