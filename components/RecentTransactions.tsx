@@ -38,6 +38,8 @@ export function RecentTransactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  
+  const address = '0x18e5b3dee30232CB8a83e4883E17df34d79E7296'; // Rupaya contract address
 
   useEffect(() => {
     const fetchTransactions = async () => {
@@ -45,17 +47,8 @@ export function RecentTransactions() {
         setIsLoading(true);
         setError(null);
 
-        const response = await fetch('https://scan.rupaya.io/api?module=account&action=txlist&address=0x18e5b3dee30232CB8a83e4883E17df34d79E7296', {
-          headers: {
-            'Accept': 'application/json'
-          }
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch transactions');
-        }
-
-        const data = await response.json();
+        const response = await fetch(`/api/transactions?address=${address}`)
+        const data = await response.json()
 
         if (Array.isArray(data.result)) {
           setTransactions(data.result
@@ -82,7 +75,7 @@ export function RecentTransactions() {
     // Refresh every 30 seconds
     const interval = setInterval(fetchTransactions, 30000);
     return () => clearInterval(interval);
-  }, []);
+  }, [address]);
 
   const formatValue = (value: string) => {
     const amount = parseInt(value) / 1e18; // Convert from wei to RUPX
