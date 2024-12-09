@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const allowedOrigins = ['https://rupaya.io', 'https://www.rupaya.io'];
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -33,18 +35,6 @@ const nextConfig = {
               "connect-src 'self' https://scan.rupaya.io https://*.vercel.live https://vercel.live https://api.rupaya.io https://*.google-analytics.com",
               "frame-src 'self' https://*.vercel.live https://vercel.live"
             ].join('; ')
-          },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: 'https://rupaya.io'
-          },
-          {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, OPTIONS'
-          },
-          {
-            key: 'Access-Control-Allow-Headers',
-            value: 'Content-Type'
           }
         ]
       }
@@ -64,6 +54,34 @@ const nextConfig = {
     scrollRestoration: true,
     typedRoutes: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'https://api.rupaya.io/:path*'
+      }
+    ]
+  },
+  async redirects() {
+    return [
+      {
+        source: '/wallet',
+        destination: 'https://wallet.rupaya.io',
+        permanent: true,
+      },
+      {
+        source: '/exchange',
+        destination: 'https://swap.rupaya.io',
+        permanent: true,
+      },
+      {
+        source: '/staking',
+        destination: 'https://app.rupaya.io/staking',
+        permanent: true,
+      },
+      // Add other redirects as needed
+    ]
+  }
 };
 
 export default nextConfig;

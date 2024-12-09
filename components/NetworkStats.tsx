@@ -22,7 +22,7 @@ export function NetworkStats() {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        const statsRes = await fetch('https://scan.rupaya.io/api/v2/stats', {
+        const statsRes = await fetch('/api/stats', {
           signal: controller.signal,
           headers: {
             'Accept': 'application/json'
