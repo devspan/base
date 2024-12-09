@@ -24,7 +24,15 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://*.google-analytics.com https://*.googletagmanager.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https: blob:; connect-src 'self' https://scan.rupaya.io https://*.vercel.live"
+            value: [
+              "default-src 'self'",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://*.google-analytics.com https://*.googletagmanager.com",
+              "style-src 'self' 'unsafe-inline'",
+              "font-src 'self' data: https://www.rupaya.io",
+              "img-src 'self' data: https: blob:",
+              "connect-src 'self' https://scan.rupaya.io https://*.vercel.live https://api.rupaya.io",
+              "frame-src 'self' https://*.vercel.live"
+            ].join('; ')
           }
         ]
       }

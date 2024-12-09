@@ -39,7 +39,7 @@ export function RecentTransactions() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
-  const address = '0x18e5b3dee30232CB8a83e4883E17df34d79E7296'; // Rupaya contract address
+  const address = '0xc250502C569454E86e3B0a308E82c935B4cbD2f4'; // Rupaya contract address
 
   useEffect(() => {
     const fetchTransactions = async () => {
