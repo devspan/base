@@ -22,9 +22,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
+          defaultTheme="dark"
+          enableSystem={false}
+          storageKey="rupaya-theme"
         >
           <div className="flex min-h-screen flex-col">
             <Header />
