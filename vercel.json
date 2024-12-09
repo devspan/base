@@ -11,5 +11,11 @@
   ],
   "env": {
     "NEXT_PUBLIC_RUPAYA_API_URL": "https://api.rupaya.io"
+  },
+  "analytics": {
+    "enabled": true,
+    "debug": false,
+    "mode": "production",
+    "domains": ["rupaya.io", "www.rupaya.io"]
   }
 } 
