@@ -45,7 +45,30 @@ export const metadata: Metadata = {
     site: '@RupayaOfficial',
     creator: '@RupayaOfficial',
   },
+  keywords: 'Rupaya, DeFi, South Asia, blockchain, cryptocurrency, financial inclusion, RUPX',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://rupaya.io',
+    languages: {
+      'en-US': '/en-US',
+      'hi': '/hi',
+      'ur': '/ur',
+      'bn': '/bn',
+    },
+  },
 }
+
+const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_ID
 
 export default function RootLayout({
   children,
@@ -54,6 +77,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}');
+            `,
+          }}
+        />
+      </head>
       <body className={inter.variable}>
         <ThemeProvider
           attribute="class"

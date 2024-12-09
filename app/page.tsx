@@ -5,6 +5,9 @@ import Roadmap from "@/components/Roadmap";
 import Team from "@/components/Team";
 import StructuredData from '@/components/StructuredData';
 import { metadata } from "./page.metadata";
+import { Suspense } from 'react'
+import Loading from './loading'
+import ErrorBoundary from '@/components/ErrorBoundary'
 
 export { metadata };
 
@@ -39,13 +42,19 @@ export default function Home() {
           }
         }}
       />
-      <div>
-        <Hero />
-        <Features />
-        <Tokenomics />
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
+          <Hero />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          <Features />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          <Tokenomics />
+        </Suspense>
         <Roadmap />
         <Team />
-      </div>
+      </ErrorBoundary>
     </>
   )
 }
