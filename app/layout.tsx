@@ -5,6 +5,9 @@ import { Analytics } from '@/components/analytics'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import './globals.css'
+import { ScrollToTop } from '@/components/ScrollToTop'
+import { cn } from '@/lib/utils'
+import { PageTransition } from '@/components/PageTransition'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -93,18 +96,28 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.variable}>
+      <body className={cn(
+        "min-h-screen bg-background font-sans antialiased",
+        inter.variable
+      )}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main>{children}</main>
-          <Footer />
+          <div className="relative flex min-h-screen flex-col">
+            <Header />
+            <PageTransition>
+              <main className="flex-1">
+                {children}
+              </main>
+            </PageTransition>
+            <Footer />
+            <ScrollToTop />
+          </div>
+          <Analytics />
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   )

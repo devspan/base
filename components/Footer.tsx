@@ -14,7 +14,18 @@ const socialLinks = [
   { name: 'Discord', href: 'https://discord.gg/cfbNWdThpy', icon: FaDiscord },
 ];
 
-const footerLinks = [
+// Define the FooterLink type
+type FooterLink = {
+  name: string;
+  href: `/${string}`; // This ensures href starts with '/'
+}
+
+type FooterSection = {
+  title: string;
+  links: FooterLink[];
+}
+
+const footerLinks: FooterSection[] = [
   {
     title: 'Solutions',
     links: [
@@ -89,7 +100,7 @@ const Footer: React.FC = () => {
                   <ul role="list" className="mt-4 space-y-4">
                     {section.links.map((item) => (
                       <li key={item.name}>
-                        <Link href={item.href} passHref>
+                        <Link href={item.href as `/${string}`} passHref>
                           <Button
                             variant="link"
                             className="p-0 h-auto text-muted-foreground hover:text-foreground"
