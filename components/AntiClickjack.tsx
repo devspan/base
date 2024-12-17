@@ -6,11 +6,11 @@ export function AntiClickjack() {
   useEffect(() => {
     // Only run on client side
     if (typeof window !== 'undefined') {
-      if (self === top) {
+      if (window.top === window.self) {
         const antiClickjack = document.getElementById('antiClickjack')
         antiClickjack?.parentNode?.removeChild(antiClickjack)
-      } else {
-        top.location = self.location
+      } else if (window.top) {
+        window.top.location = window.self.location
       }
     }
   }, [])

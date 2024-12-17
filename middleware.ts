@@ -1,49 +1,46 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-const allowedOrigins = ['https://rupaya.io', 'https://www.rupaya.io']
-
 export function middleware(request: NextRequest) {
+  const nonce = Buffer.from(crypto.randomUUID()).toString('base64')
+  const cspHeader = `
+    default-src 'self';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic';
+    style-src 'self' 'nonce-${nonce}';
+    img-src 'self' blob: data:;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+`
+
   const response = NextResponse.next()
-  
-  // Get origin from request
-  const origin = request.headers.get('origin')
-  
-  // Handle CORS
-  if (origin && allowedOrigins.includes(origin)) {
-    response.headers.set('Access-Control-Allow-Origin', origin)
-  }
-  
-  // Security Headers including Clickjacking Protection
-  response.headers.set('X-Frame-Options', 'DENY')
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-  
-  // Update existing CSP with frame-ancestors
-  const currentCsp = response.headers.get('Content-Security-Policy') || ''
-  const cspDirectives = currentCsp.split(';').filter(directive => !directive.trim().startsWith('frame-ancestors'))
-  
   response.headers.set(
     'Content-Security-Policy',
-    [
-      ...cspDirectives,
-      "frame-ancestors 'none'",
-      // Preserve existing CSP directives
-      "default-src 'self'",
-      "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://*.vercel.live https://*.google-analytics.com https://*.googletagmanager.com https://vercel.live https://vercel.com",
-      "style-src 'self' 'unsafe-inline'",
-      "font-src 'self' data: https://fonts.gstatic.com",
-      "img-src 'self' data: https: blob:",
-      "connect-src 'self' https://scan.rupaya.io https://*.vercel.live https://vercel.live https://api.rupaya.io https://*.google-analytics.com",
-      "frame-src 'self' https://*.vercel.live https://vercel.live"
-    ].join('; ')
+    cspHeader.replace(/\s{2,}/g, ' ').trim()
   )
-  
+  response.headers.set('X-Frame-Options', 'DENY')
+
   return response
 }
 
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico).*)',
-  ]
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico (favicon file)
+     */
+    {
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
+  ],
 } 
