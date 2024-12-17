@@ -4,6 +4,7 @@ import Footer from '@/components/Footer'
 import Header from '@/components/Header'
 import { ThemeProvider } from '@/components/theme-provider'
 import { AnalyticsProvider } from '@/components/providers/AnalyticsProvider'
+import { AntiClickjack } from '@/components/AntiClickjack'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/react'
 
@@ -21,6 +22,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <AntiClickjack />
+      </head>
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
