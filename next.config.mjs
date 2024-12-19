@@ -32,6 +32,7 @@ const nextConfig = {
         hostname: 'avatars.githubusercontent.com',
       },
     ],
+    domains: ['rupaya.io', 'www.rupaya.io'],
   },
   async headers() {
     return [

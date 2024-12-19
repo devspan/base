@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { useTheme } from 'next-themes'
 import { Button } from "@/components/ui/button"
@@ -14,6 +13,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { motion } from 'framer-motion'
 import { useScroll } from 'framer-motion'
+import { Logo } from '@/components/ui/logo'
 
 // Define our own Route type for internal navigation
 type AppRoute = 
@@ -105,12 +105,7 @@ export default function Header() {
           <div className="mr-4 hidden md:flex">
             <Link href="/" className="mr-6 flex items-center space-x-2">
               {mounted && (
-                <Image 
-                  src={logoSrc}
-                  alt="Rupaya Logo" 
-                  width={24} 
-                  height={24} 
-                />
+                <Logo />
               )}
               <span className="hidden font-bold sm:inline-block">Rupaya</span>
             </Link>
@@ -133,12 +128,7 @@ export default function Header() {
               <SheetContent side="left" className="pr-0">
                 <Link href="/" className="flex items-center space-x-2">
                   {mounted && (
-                    <Image 
-                      src={logoSrc}
-                      alt="Rupaya Logo" 
-                      width={24} 
-                      height={24} 
-                    />
+                    <Logo />
                   )}
                   <span className="font-bold">Rupaya</span>
                 </Link>
