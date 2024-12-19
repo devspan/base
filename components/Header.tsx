@@ -103,11 +103,8 @@ export default function Header() {
       <nav role="navigation" aria-label="Main menu">
         <div className="container flex h-14 items-center">
           <div className="mr-4 hidden md:flex">
-            <Link href="/" className="mr-6 flex items-center space-x-2">
-              {mounted && (
-                <Logo />
-              )}
-              <span className="hidden font-bold sm:inline-block">Rupaya</span>
+            <Link href="/" className="mr-6 flex items-center">
+              {mounted && <Logo />}
             </Link>
             {isDesktop && (
               <NavigationMenu>
@@ -126,11 +123,8 @@ export default function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="left" className="pr-0">
-                <Link href="/" className="flex items-center space-x-2">
-                  {mounted && (
-                    <Logo />
-                  )}
-                  <span className="font-bold">Rupaya</span>
+                <Link href="/" className="flex items-center">
+                  {mounted && <Logo />}
                 </Link>
                 <nav className="flex flex-col gap-4 mt-4">
                   {navItems.map((item) => (
