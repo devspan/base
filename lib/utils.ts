@@ -18,32 +18,37 @@ export const isTestnetEnabled = (): boolean => {
   return process.env.NEXT_PUBLIC_ENABLE_TESTNET === 'true'
 }
 
-// Add better error handling utilities
+// Enhance error handling utility
 export class AppError extends Error {
   constructor(
     message: string,
     public code: string,
-    public statusCode: number = 500
+    public statusCode: number = 500,
+    public context?: Record<string, unknown>
   ) {
     super(message)
     this.name = 'AppError'
+    Error.captureStackTrace(this, this.constructor)
   }
 }
 
-export const handleError = (error: unknown) => {
-  if (error instanceof AppError) {
-    return {
+export function createErrorResponse(error: unknown) {
+  if (error instanceof AppError) return {
+    success: false,
+    error: {
       message: error.message,
       code: error.code,
-      statusCode: error.statusCode,
+      context: error.context
     }
   }
   
   console.error('Unexpected error:', error)
   return {
-    message: 'An unexpected error occurred',
-    code: 'UNKNOWN_ERROR',
-    statusCode: 500,
+    success: false,
+    error: {
+      message: 'An unexpected error occurred',
+      code: 'UNKNOWN_ERROR'
+    }
   }
 }
 

@@ -49,13 +49,15 @@ const Toast = React.forwardRef<
     <ToastPrimitives.Root
       ref={ref}
       className={cn(toastVariants({ variant }), className)}
+      role="alert"
+      aria-live="polite"
       {...props}
     />
   )
 })
 Toast.displayName = ToastPrimitives.Root.displayName
 
-const ToastAction = React.forwardRef<
+const ToastAction = React.memo(React.forwardRef<
   React.ElementRef<typeof ToastPrimitives.Action>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitives.Action>
 >(({ className, ...props }, ref) => (
@@ -67,7 +69,7 @@ const ToastAction = React.forwardRef<
     )}
     {...props}
   />
-))
+)))
 ToastAction.displayName = ToastPrimitives.Action.displayName
 
 const ToastClose = React.forwardRef<

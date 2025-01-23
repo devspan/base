@@ -13,6 +13,10 @@ export function middleware(request: NextRequest) {
     'X-XSS-Protection': '1; mode=block',
     'X-DNS-Prefetch-Control': 'on',
     'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+    'Cross-Origin-Embedder-Policy': 'require-corp',
+    'Cross-Origin-Opener-Policy': 'same-origin',
+    'Cross-Origin-Resource-Policy': 'same-origin',
+    'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline';",
   }
 
   Object.entries(securityHeaders).forEach(([key, value]) => {
