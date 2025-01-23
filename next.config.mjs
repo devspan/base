@@ -61,9 +61,12 @@ const nextConfig = {
     localeDetection: false,
   },
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true,
     typedRoutes: true,
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    optimisticClientCache: true,
   },
   async rewrites() {
     return [

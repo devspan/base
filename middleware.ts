@@ -4,12 +4,20 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const response = NextResponse.next()
 
-  // Add X-Frame-Options header
-  response.headers.set('X-Frame-Options', 'DENY')
-  
-  // Add other security headers
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+  // Add security headers
+  const securityHeaders = {
+    'X-Frame-Options': 'DENY',
+    'X-Content-Type-Options': 'nosniff',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'Permissions-Policy': 'camera=(), microphone=(), geolocation=()',
+    'X-XSS-Protection': '1; mode=block',
+    'X-DNS-Prefetch-Control': 'on',
+    'Strict-Transport-Security': 'max-age=31536000; includeSubDomains',
+  }
+
+  Object.entries(securityHeaders).forEach(([key, value]) => {
+    response.headers.set(key, value)
+  })
 
   return response
 }

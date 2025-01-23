@@ -2,11 +2,10 @@ import { Suspense } from 'react'
 import { Inter } from 'next/font/google'
 import Footer from '@/components/Footer'
 import Header from '@/components/Header'
-import { ThemeProvider } from '@/components/theme-provider'
 import { AnalyticsProvider } from '@/components/providers/AnalyticsProvider'
 import { AntiClickjack } from '@/components/AntiClickjack'
+import { Providers } from './providers'
 import './globals.css'
-import { Analytics } from '@vercel/analytics/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,12 +25,7 @@ export default function RootLayout({
         <AntiClickjack />
       </head>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem={false}
-          storageKey="rupaya-theme"
-        >
+        <Providers>
           <div className="flex min-h-screen flex-col">
             <Suspense>
               <Header />
@@ -48,8 +42,7 @@ export default function RootLayout({
           <Suspense>
             <AnalyticsProvider />
           </Suspense>
-        </ThemeProvider>
-        <Analytics />
+        </Providers>
       </body>
     </html>
   )
