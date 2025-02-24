@@ -15,5 +15,15 @@ export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
     return <>{children}</>
   }
 
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+  return (
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme="dark"
+      enableSystem={false}
+      disableTransitionOnChange
+      {...props}
+    >
+      {children}
+    </NextThemesProvider>
+  )
 }

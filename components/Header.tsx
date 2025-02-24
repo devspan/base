@@ -9,7 +9,7 @@ import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMe
 import { ThemeToggle } from '@/components/ThemeToggle'
 import { Menu } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, useCallback, useMemo } from 'react'
 import { useMediaQuery } from '@/hooks/useMediaQuery'
 import { motion } from 'framer-motion'
 import { useScroll } from 'framer-motion'
@@ -59,7 +59,10 @@ export default function Header() {
     return scrollY.onChange(() => setIsScrolled(scrollY.get() > 0))
   }, [scrollY])
 
-  const logoSrc = mounted && theme === 'dark' ? '/rupayalogo.svg' : '/rupayalogodark.svg'
+  const logoSrc = useMemo(() => {
+    if (!mounted) return '/rupayalogo.svg' // Default to dark logo
+    return theme === 'dark' ? '/rupayalogo.svg' : '/rupayalogodark.svg'
+  }, [mounted, theme])
 
   const renderNavItems = useCallback(() => (
     navItems.map((item) => (

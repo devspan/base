@@ -6,6 +6,7 @@ import { AnalyticsProvider } from '@/components/providers/AnalyticsProvider'
 import { AntiClickjack } from '@/components/AntiClickjack'
 import { Providers } from './providers'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,24 +26,26 @@ export default function RootLayout({
         <AntiClickjack />
       </head>
       <body className={inter.className}>
-        <Providers>
-          <div className="flex min-h-screen flex-col">
-            <Suspense>
-              <Header />
-            </Suspense>
-            <main className="flex-1">
-              <Suspense fallback={<div>Loading...</div>}>
-                {children}
+        <ThemeProvider>
+          <Providers>
+            <div className="flex min-h-screen flex-col">
+              <Suspense>
+                <Header />
               </Suspense>
-            </main>
+              <main className="flex-1">
+                <Suspense fallback={<div>Loading...</div>}>
+                  {children}
+                </Suspense>
+              </main>
+              <Suspense>
+                <Footer />
+              </Suspense>
+            </div>
             <Suspense>
-              <Footer />
+              <AnalyticsProvider />
             </Suspense>
-          </div>
-          <Suspense>
-            <AnalyticsProvider />
-          </Suspense>
-        </Providers>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   )

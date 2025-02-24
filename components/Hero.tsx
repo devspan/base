@@ -7,13 +7,29 @@ import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { useInView } from 'react-intersection-observer'
 import { getEnvVariable, isTestnetEnabled } from '@/lib/utils'
+import { useState, useEffect } from 'react'
 
-export default function Component() {
+const THEME_IMAGES = {
+  dark: "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80",
+  light: "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
+};
+
+export default function Hero() {
   const { theme } = useTheme()
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
+  const [mounted, setMounted] = useState(false)
+
+  // Ensure proper server-client hydration
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return <div className="h-[400px] w-full bg-muted" /> // Show skeleton while loading
+  }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -102,10 +118,7 @@ export default function Component() {
       >
         <div className="relative h-56 w-full sm:h-72 md:h-96 lg:h-full">
           <Image
-            src={theme === 'dark' 
-              ? "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80" 
-              : "https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=2850&q=80"
-            }
+            src={THEME_IMAGES[theme === 'dark' ? 'dark' : 'light']}
             alt="Rupaya DeFi"
             fill
             className="object-cover"
