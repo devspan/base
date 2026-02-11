@@ -55,18 +55,11 @@ const nextConfig = {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 'https://rupaya.io',
     NEXT_PUBLIC_RUPAYA_API_URL: process.env.NEXT_PUBLIC_RUPAYA_API_URL || 'https://api.rupaya.io'
   },
-  i18n: {
-    locales: ['en', 'hi', 'bn', 'ur'],
-    defaultLocale: 'en',
-    localeDetection: false,
-  },
   experimental: {
-    scrollRestoration: true,
     typedRoutes: true,
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    optimisticClientCache: true,
   },
   async rewrites() {
     return [
